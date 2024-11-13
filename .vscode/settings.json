@@ -1,0 +1,13 @@
+{
+  "editor.fontSize": 12,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  // "workbench.colorTheme": "Night Owl"
+
+}

@@ -1,0 +1,147 @@
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true
+//   },
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:react/recommended",
+//     "plugin:@typescript-eslint/recommended"
+//   ],
+//   "overrides": [],
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaVersion": "latest",
+//     "sourceType": "module"
+//   },
+//   "plugins": [
+//     "react",
+//     "@typescript-eslint"
+//   ],
+//   "rules": {
+//     "react/prop-types": 1,
+//     "max-len": [
+//       "warn",
+//       {
+//         "code": 120,
+//         "ignoreComments": true,
+//         "ignoreTemplateLiterals": true
+//       }
+//     ],
+//     "no-console": [
+//       "warn",
+//       {
+//         "allow": [
+//           "error"
+//         ]
+//       }
+//     ],
+//     "react/jsx-max-props-per-line": [
+//       "error",
+//       {
+//         "when": "always",
+//         "maximum": 2
+//       }
+//     ],
+//     "sort-imports": [
+//       2,
+//       {
+//         "ignoreCase": false,
+//         "ignoreMemberSort": false,
+//         "ignoreDeclarationSort": true
+//       }
+//     ],
+//     "indent": [
+//       "error",
+//       2
+//     ],
+//     "quotes": [
+//       "error",
+//       "single"
+//     ],
+//     "semi": [
+//       "error",
+//       "never"
+//     ],
+//     "react/jsx-filename-extension": [
+//       1,
+//       {
+//         "extensions": [".js", ".jsx"]
+//       }
+//     ]
+//   }
+// }
+
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "max-len": [
+      "warn",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": ["error"]
+      }
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "when": "always",
+        "maximum": 2
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ]
+  }
+}
