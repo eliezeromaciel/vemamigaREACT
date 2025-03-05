@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 function Navbar () {
   return (
@@ -42,7 +44,7 @@ function Navbar () {
       {/* <!-- really begin offcanvas --> */}
       <div className="offcanvas offcanvas-start bg-verdeTelaInicial"  style={{ width: '200px' }}
         tabIndex="-1" id="offcanvasNavbar" 
-        aria-labelledby="offcanvasNavbarLabel" data-bs-backdrop="false" 
+        aria-labelledby="offcanvasNavbarLabel" data-bs-backdrop="true" 
       >
         <div className="offcanvas-header p-1 justify-content-around">
           <a href="/">
@@ -57,7 +59,7 @@ function Navbar () {
           </button>
         </div>
 
-        {/* <!-- <SideBar/> --> */}
+        {/* <!-- begin SideBar --> */}
         <div className="d-flex flex-column justify-content-between col-auto bg-verdeTelaInicial min-vh-100">
           <div className="">
             <ul className="nav nav-pills flex-column mt-2 mt-sm-0" id="menu">
@@ -70,11 +72,10 @@ function Navbar () {
                 <ul className="nav collapse ms-1 flex-column" id="sidemenu"
                   data-bs-parent="#menu"> 
                   <li className="nav-item my-1" data-bs-toggle="offcanvas">
-                    <a className="nav-link text-white ms-3" href="/empresas"
+                    <Link className="nav-link text-white ms-3" to="/empresas"
                       aria-current="page">
-                      <i className="bi bi-pie-chart"></i>
-                                    Empresas
-                    </a>
+                      <i className="bi bi-pie-chart"></i> Empresas
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -125,7 +126,6 @@ function Navbar () {
       </div>
       {/* <!-- end offcanvas --> */}
 
-      
     </div>
   )
 
