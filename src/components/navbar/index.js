@@ -72,9 +72,9 @@ function Navbar () {
                 <ul className="nav collapse ms-1 flex-column" id="sidemenu"
                   data-bs-parent="#menu"> 
                   <li className="nav-item my-1" data-bs-toggle="offcanvas">
-                    <Link className="nav-link text-white ms-3" to="/empresas"
+                    <Link className="nav-link text-white ms-3" to="/clientes"
                       aria-current="page">
-                      <i className="bi bi-pie-chart"></i> Empresas
+                      <i className="bi bi-pie-chart"></i> Clientes
                     </Link>
                   </li>
                 </ul>

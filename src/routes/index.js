@@ -4,7 +4,7 @@ import Navbar from '../components/navbar'
 import Dashboard from '../pages/dashboard'
 import Login from '../pages/login'
 import AutoCadastro from '../pages/autocadastro'
-import Empresas from '../pages/empresas'
+import Clientes from '../pages/clientes'
 import NotFound from '../pages/notfound'
 
 
@@ -18,7 +18,7 @@ const Rotas = () => {
           {/* acrescento abqaixo, caso tenha hierarquias de rotas */}
         </Route>
         <Route path='/login' element={<Login/>} />
-        <Route path='/empresas' element={<Empresas/>} />
+        <Route path='/clientes' element={<Clientes/>} />
         <Route path='/notfound' element={<NotFound/>} />
         <Route path='/autocadastro' element={<AutoCadastro/>} />
       </Routes>
