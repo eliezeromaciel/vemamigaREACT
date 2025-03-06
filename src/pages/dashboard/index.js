@@ -2,7 +2,6 @@ import {React, useState} from 'react'
 
 
 
-
 const Dashboard = () => {
   
   const [telefone, setTelefone] = useState('')
@@ -10,13 +9,14 @@ const Dashboard = () => {
 
   
   const formatPhoneNumber = (value) => {
-    const phoneNumber = value.replace(/\D/g, '') 
-  
-    
+    const phoneNumber = value.replace(/\D/g, '') // Remove tudo que não for número
+
+    if (phoneNumber.length === 0) return '' // Permite apagar o campo
+
     if (phoneNumber.length <= 10) {
-      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 6)}-${phoneNumber.substring(6, 10)}`
+      return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 6)}${phoneNumber.length > 6 ? '-' + phoneNumber.slice(6) : ''}`
     } else {
-      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 7)}-${phoneNumber.substring(7, 11)}`
+      return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7, 11)}`
     }
   }
 
@@ -38,7 +38,8 @@ const Dashboard = () => {
   }
   
   const handlePhoneChange = (event) => {
-    const formatted = formatPhoneNumber(event.target.value)
+    const rawValue = event.target.value 
+    const formatted = formatPhoneNumber(rawValue)
     setTelefone(formatted)
   }
 
@@ -63,6 +64,7 @@ const Dashboard = () => {
                   type="text"
                   name="nome" 
                   placeholder="Nome"
+                  maxLength="30"
                   required 
                 />
               </div>
@@ -73,7 +75,7 @@ const Dashboard = () => {
                   <span className="input-group-text">+55</span>
                   <input 
                     className="form-control" 
-                    type="tel"
+                    type="text"
                     name="telefone" 
                     placeholder="Telefone"
                     value={telefone}
@@ -86,15 +88,19 @@ const Dashboard = () => {
             
               {/* instagram */}
               <div className="mb-3">
-                <input 
-                  className="form-control" 
-                  type="text"
-                  name="instagram" 
-                  placeholder="Instagram"
-                  required 
-                />
+                <div className="input-group">
+                  <span className="input-group-text">@</span>
+                  <input 
+                    className="form-control" 
+                    type="text"
+                    name="instagram" 
+                    placeholder="Instagram"
+                    maxLength="30"
+                    required 
+                  />
+                </div>
               </div>
-
+            
               {/* data nascimento */}
               <div className="mb-3">
                 <input 
@@ -111,9 +117,10 @@ const Dashboard = () => {
               
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">
-              Criar
+                  Criar
                 </button>
               </div>
+              
             </form>
           </div>
         </div>
