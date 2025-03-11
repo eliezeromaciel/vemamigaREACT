@@ -1,12 +1,13 @@
-import React from 'react'
+import {React, } from 'react'
 import { Link } from 'react-router-dom'
 
 
 function Navbar () {
+
   return (
-    
+
     <div className="navbar bg-verdeTelaInicial d-flex">  
-            
+         
       <button className="navbar-toggler shadow-none" type="button"
         data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" 
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation" 
@@ -30,10 +31,9 @@ function Navbar () {
           </div>
         </div>
         {/* <!-- end avatar --> */}
+
         {/* <!-- begin button out --> */}
-        <button className="navbar-toggler mx-2 shadow-none " type="button" 
-        
-        >
+        <button className="navbar-toggler mx-2 shadow-none " type="button"  >
           <a href="/login" 
             className="bi bi-box-arrow-right text-white">
           </a>
@@ -47,10 +47,12 @@ function Navbar () {
         aria-labelledby="offcanvasNavbarLabel" data-bs-backdrop="true" 
       >
         <div className="offcanvas-header p-1 justify-content-around">
+          {/* logotipo que leva pra página inicial */}
           <a href="/">
             <img src="/assets/img/logoLogin.png" alt="Logo"
               style={{ maxWidth: '45px' }} />
           </a>
+          {/* botão que fecha e abre e fecha o offcanvas */}
           <button className="navbar-toggler shadow-none" type="button"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" 
             aria-controls="offcanvasNavbar" aria-label="Toggle navigation"
@@ -71,11 +73,13 @@ function Navbar () {
                 </a>
                 <ul className="nav collapse ms-1 flex-column" id="sidemenu"
                   data-bs-parent="#menu"> 
-                  <li className="nav-item my-1" data-bs-toggle="offcanvas">
-                    <Link className="nav-link text-white ms-3" to="/clientes"
+                  
+                  <li className="nav-item my-1" > 
+                    <a className="nav-link text-white ms-3" href="/clientes"
                       aria-current="page">
-                      <i className="bi bi-pie-chart"></i> Clientes
-                    </Link>
+                      <i className="bi bi-pie-chart"> </i> 
+                      Clientes
+                    </a>
                   </li>
                 </ul>
               </li>
@@ -88,31 +92,31 @@ function Navbar () {
                 </a>
                 <ul className="nav collapse ms-1 flex-column " id="sidemenu2"
                   data-bs-parent="#menu"> 
-                  <li className="nav-item my-1" data-bs-toggle="offcanvas">
+                  <li className="nav-item my-1">
                     <a className="nav-link text-white ms-3" href="/novousuario"
                       aria-current="page">
-                      <i className="bi bi-people"></i>
-                                    Usuário
+                      <i className="bi bi-people"> </i>
+                        Usuário
                     </a>
                   </li>
                 </ul>
                 <ul className="nav collapse ms-1 flex-column" id="sidemenu2"
                   data-bs-parent="#menu"> 
-                  <li className="nav-item my-1" data-bs-toggle="offcanvas">
+                  <li className="nav-item my-1">
                     <a className="nav-link text-white ms-3" href="/parametros"
                       aria-current="page">
-                      <i className="bi bi-gear" ></i>
-                                    Parâmetros
+                      <i className="bi bi-gear" > </i>
+                        Parâmetros
                     </a>
                   </li>
                 </ul>
                 <ul className="nav collapse ms-1 flex-column" id="sidemenu2"
                   data-bs-parent="#menu"> 
-                  <li className="nav-item my-1" data-bs-toggle="offcanvas">
+                  <li className="nav-item my-1">
                     <a className="nav-link text-white ms-3" href="/#"
                       aria-current="page">
-                      <i className="bi bi-question-circle"></i>
-                                    Seila
+                      <i className="bi bi-question-circle"> </i>
+                                  Seila
                     </a>
                   </li>
                 </ul>
@@ -120,8 +124,6 @@ function Navbar () {
             </ul>
           </div>
         </div>
-
-
         {/* <!-- end sidebar --> */}
       </div>
       {/* <!-- end offcanvas --> */}
