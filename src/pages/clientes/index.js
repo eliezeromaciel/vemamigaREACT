@@ -1,19 +1,4 @@
-// import React from 'react'
-
-// const Empresas = () => {
-//   return (
-//     <div>
-//             rota empresas
-
-
-//     </div>
-//   )
-// }
-
-// export default Empresas
-
 import {React, useState} from 'react'
-
 
 
 const Clientes = () => {
@@ -141,6 +126,7 @@ const Clientes = () => {
       </div>
     </div>
   )
+  
 }
 
 export default Clientes
