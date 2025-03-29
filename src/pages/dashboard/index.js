@@ -9,7 +9,8 @@ const clientesCadastrados = [
   'Fernanda Rocha',
   'Gabriela Silva',
   'Helena Costa',
-  'Jeferson Silva', 
+  'Jeferson Silva',
+  'Adalberta Felisbrina Souza Cândido' 
 ]
 
 // const Dashboards = () => {
@@ -45,6 +46,8 @@ const clientesCadastrados = [
 //         onChange={handleChange}
 //         placeholder="Digite o nome..."
 //       />
+
+
 //       {sugestoes.length > 0 && (
 //         <ul
 //           className="list-group position-absolute mt-1 shadow"
@@ -62,6 +65,8 @@ const clientesCadastrados = [
 //           ))}
 //         </ul>
 //       )}
+
+
 //     </div>
 //   )
 // }
@@ -69,33 +74,26 @@ const clientesCadastrados = [
 
 const Dashboard = () => {
 
-
   const [clientesFiltrados, setClientesFiltrados] = useState ('')
   const [inputNomeCliente, setInputNomeCliente] = useState ('')
 
-
-
-
-  
   const handleChangeInputNome = (e) => {  
     const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
+    const valorLowerCase = valor.toLowerCase()
     setInputNomeCliente(valor)    // então, dou este valor do onchange para o state 
-
     
     const filtrados = clientesCadastrados.filter( (elem) => 
-      elem.toLowerCase().includes(valor) )
+      elem.toLowerCase().includes(valorLowerCase) )
       
     setClientesFiltrados(filtrados)
   }
 
-    
-    
-  
-
-
+  const handleSelected = (elem) => {
+    setInputNomeCliente(elem)
+    setClientesFiltrados([])
+  }
 
   return (
-
     <div className="container mt-4">
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -116,7 +114,25 @@ const Dashboard = () => {
                   value={inputNomeCliente}
                   onChange={handleChangeInputNome}
                 />
+                <ul className='list-group position-absolute shadow' >
+                  { clientesFiltrados.length>0 ?  (clientesFiltrados.map( (elem, index) => {
+                    return (
+                      <li 
+                        key={index}
+                        className='list-group-item list-group-item-action'
+                        style={{ cursor: 'pointer' }}
+                        onClick={ () => { 
+                          handleSelected(elem)
+                        }}
+                      >
+                        {elem}
+                      </li>
+                      
+                    )
+                  })) : null}
+                </ul>
               </div>
+
 
 
             
@@ -135,12 +151,6 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div>
-                lista dos nomes:
-                <div>
-                  {JSON.stringify(clientesFiltrados)}
-                </div>
-              </div>
             
 
               
@@ -155,77 +165,10 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+
+
   )
 }
 
-
-// const Dashboard = () => {
-
-//   const listaAlunos = [
-//     { nome: 'Ana', idade: 20 },
-//     { nome: 'Carlos', idade: 17 },
-//     { nome: 'João', idade: 21 },
-//     { nome: 'Maria', idade: 19 },
-//   ]
-
-//   const [ nomes, setNomes] = useState ('joao')
-//   const [ alunos, setAlunos] = useState ('alunos maiores abaixo')
-  
-//   const [alunosPorLetra, setAlunosPorLetra] = useState('')
-
-//   const filtraClienteNomeGrande = () => {
-
-//     let novos = clientesCadastrados.filter ( (elemento) => 
-//       elemento.length > 7 
-//     )
-//     setNomes(novos)
-//   }
-
-//   const filtraMaior = () => {
-//     let alunosMaiores = listaAlunos.filter ( (elem) => 
-//       elem.idade > 18
-//     )
-//     setAlunos(alunosMaiores)
-
-//   }
-
-//   const filtraLetra = () => {
-//     const pegaLetraInput = document.getElementsByClassName('joao')
-//     let listaAlunosPorLetra = listaAlunos.filter ( (elem) => 
-//       elem.nome.toLowerCase().includes(pegaLetraInput[0].value) // LOWERCASE PARA TRANSFORMAR TUDO EM MINÚSCULAS
-//     )
-//     setAlunosPorLetra(listaAlunosPorLetra)
-
-//   }
-  
-
-
-//   return (
-
-//     <div>
-
-//       <div>
-//         <button onClick={filtraClienteNomeGrande}> aperte </button>
-//         <li>lista de alunos maiores:</li>
-//         <lu><button onClick={filtraMaior}>aperte:</button></lu>
-
-//         <li> alunos maiores aqui: {JSON.stringify(alunos)}</li>
-//       </div>
-
-//       <div>
-//         <li>lista de alunos com letra xxx :</li>
-//         <lu> <input className='joao' type="text"
-//           placeholder='pesquise por letras' />     </lu>
-//         <lu> <button onClick={filtraLetra}>clique</button></lu>
-
-//         <li> lista abaixo:  {JSON.stringify(alunosPorLetra)}</li>
-//       </div>
-      
-//     </div>
-//   )
-
-
-
-// }
 
 export default Dashboard
