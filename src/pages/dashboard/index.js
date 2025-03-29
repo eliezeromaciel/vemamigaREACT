@@ -1,75 +1,6 @@
 import {React, useState } from 'react'
 
-const clientesCadastrados = [
-  'Ana Souza',
-  'Bruna Lima',
-  'Carla Mendes',
-  'Carlos Magnum',
-  'Daniela Farias',
-  'Fernanda Rocha',
-  'Gabriela Silva',
-  'Helena Costa',
-  'Jeferson Silva',
-  'Adalberta Felisbrina Souza Cândido' 
-]
-
-// const Dashboards = () => {
-//   const [input, setInput] = useState('')
-//   const [sugestoes, setSugestoes] = useState([])
-
-//   const handleChange = (e) => {
-//     const valor = e.target.value
-//     setInput(valor)
-
-//     if (valor.length > 0) {
-//       const filtrados = clientesCadastrados.filter((cliente) =>
-//         cliente.toLowerCase().includes(valor.toLowerCase())
-//       )
-//       setSugestoes(filtrados)
-//     } else {
-//       setSugestoes([])
-//     }
-//   }
-
-//   const handleSelect = (nome) => {
-//     setInput(nome)
-//     setSugestoes([])
-//   }
-
-//   return (
-//     <div className="container mt-3">
-//       <label className="form-label">Nome da Cliente</label>
-//       <input
-//         type="text"
-//         className="form-control"
-//         value={input}
-//         onChange={handleChange}
-//         placeholder="Digite o nome..."
-//       />
-
-
-//       {sugestoes.length > 0 && (
-//         <ul
-//           className="list-group position-absolute mt-1 shadow"
-//           style={{ zIndex: 10 }}
-//         >
-//           {sugestoes.map((cliente, index) => (
-//             <li
-//               key={index}
-//               className="list-group-item list-group-item-action"
-//               onClick={() => handleSelect(cliente)}
-//               style={{ cursor: 'pointer' }}
-//             >
-//               {cliente}
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-
-
-//     </div>
-//   )
-// }
+import {clientesCadastrados, tipoServicosCadastrados} from '../../components/data/database.js'
 
 
 const Dashboard = () => {
@@ -108,7 +39,7 @@ const Dashboard = () => {
                   className="form-control" 
                   type="text"
                   name="nome" 
-                  placeholder="Nome"
+                  placeholder="Cliente"
                   maxLength="30"
                   required 
                   value={inputNomeCliente}
@@ -136,19 +67,29 @@ const Dashboard = () => {
               </div>
 
             
-              {/* instagram */}
+              {/* serviço prestado */}
               <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text">@</span>
-                  <input 
-                    className="form-control" 
-                    type="text"
-                    name="instagram" 
-                    placeholder="Instagram"
-                    maxLength="30"
-                    required 
-                  />
-                </div>
+                <input 
+                  className="form-control" 
+                  type="text"
+                  name="servicoPrestado" 
+                  placeholder="Serviço Prestado"
+                  maxLength="30"
+                  required 
+                />
+              </div>    
+              
+                    
+              {/* mensagem */}
+              <div className="mb-3">
+                <input 
+                  className="form-control" 
+                  type="text"
+                  name="mensagem" 
+                  placeholder="Mensagem"
+                  maxLength="300"
+                  required 
+                />
               </div>          
 
               
