@@ -114,7 +114,9 @@ const Dashboard = () => {
                   value={inputNomeCliente}
                   onChange={handleChangeInputNome}
                 />
-                <ul className='list-group position-absolute shadow' >
+                <ul className='list-group position-absolute shadow'
+                  style={{ zIndex: 1000 }}    
+                >
                   { clientesFiltrados.length>0 ?  (clientesFiltrados.map( (elem, index) => {
                     return (
                       <li 
@@ -133,8 +135,6 @@ const Dashboard = () => {
                 </ul>
               </div>
 
-
-
             
               {/* instagram */}
               <div className="mb-3">
@@ -149,9 +149,7 @@ const Dashboard = () => {
                     required 
                   />
                 </div>
-              </div>
-
-            
+              </div>          
 
               
               <div className="d-grid">
@@ -165,8 +163,6 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-
-
   )
 }
 
