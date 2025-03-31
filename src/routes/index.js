@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import Dashboard from '../pages/dashboard'
 import Login from '../pages/login'
+import ModeloMensagem from '../pages/modeloMensagem'
 import AutoCadastro from '../pages/autocadastro'
 import Clientes from '../pages/clientes'
 import NotFound from '../pages/notfound'
@@ -21,6 +22,7 @@ const Rotas = () => {
         <Route path='/clientes' element={<Clientes/>} />
         <Route path='/notfound' element={<NotFound/>} />
         <Route path='/autocadastro' element={<AutoCadastro/>} />
+        <Route path='/mensagens' element={<ModeloMensagem/>} />
       </Routes>
     </BrowserRouter>
   )

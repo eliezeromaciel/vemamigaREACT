@@ -81,6 +81,13 @@ function Navbar () {
                       Clientes
                     </a>
                   </li>
+                  <li className="nav-item my-1" > 
+                    <a className="nav-link text-white ms-3" href="/mensagens"
+                      aria-current="page">
+                      <i className="bi bi-pie-chart"> </i> 
+                      Mensagens
+                    </a>
+                  </li>
                 </ul>
               </li>
         
