@@ -8,6 +8,9 @@ const Dashboard = () => {
   const [clientesFiltrados, setClientesFiltrados] = useState ('')
   const [inputNomeCliente, setInputNomeCliente] = useState ('')
 
+  const [servicoPrestadoFiltrados, setServicoPrestadoFiltrados] = useState ('')
+  const [inputServicoPrestado, setInputServicoPrestado] = useState ('')
+
   const handleChangeInputNome = (e) => {  
     const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
     const valorLowerCase = valor.toLowerCase()
@@ -19,11 +22,27 @@ const Dashboard = () => {
     setClientesFiltrados(filtrados)
   }
 
-  const handleSelected = (elem) => {
+  const handleClienteSelected = (elem) => {
     setInputNomeCliente(elem)
     setClientesFiltrados([])
   }
 
+  const handleChangeInputServicoPrestado = (e) => {  
+    const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
+    const valorLowerCase = valor.toLowerCase()
+    setInputServicoPrestado(valor)    // então, dou este valor do onchange para o state 
+    
+    const filtrados = tipoServicosCadastrados.filter( (elem) => 
+      elem.toLowerCase().includes(valorLowerCase) )
+      
+    setServicoPrestadoFiltrados(filtrados)
+  }
+
+  const handleServicoPrestadoSelected = (elem) => {
+    setInputServicoPrestado(elem)
+    setServicoPrestadoFiltrados([])
+  }
+  
   return (
     <div className="container mt-4">
       <div className="row justify-content-center">
@@ -44,6 +63,8 @@ const Dashboard = () => {
                   required 
                   value={inputNomeCliente}
                   onChange={handleChangeInputNome}
+                  // onBlur={() =>  setClientesFiltrados([])} 
+                  onBlur={() => setTimeout(() => setClientesFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
                 />
                 <ul className='list-group position-absolute shadow'
                   style={{ zIndex: 1000 }}    
@@ -55,7 +76,7 @@ const Dashboard = () => {
                         className='list-group-item list-group-item-action'
                         style={{ cursor: 'pointer' }}
                         onClick={ () => { 
-                          handleSelected(elem)
+                          handleClienteSelected(elem)
                         }}
                       >
                         {elem}
@@ -66,8 +87,7 @@ const Dashboard = () => {
                 </ul>
               </div>
 
-            
-              {/* serviço prestado */}
+              {/* servico prestado */}
               <div className="mb-3">
                 <input 
                   className="form-control" 
@@ -76,9 +96,31 @@ const Dashboard = () => {
                   placeholder="Serviço Prestado"
                   maxLength="30"
                   required 
+                  value={inputServicoPrestado}
+                  onChange={handleChangeInputServicoPrestado}
+                  onBlur={() => setTimeout(() => setServicoPrestadoFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
                 />
-              </div>    
-              
+                <ul className='list-group position-absolute shadow'
+                  style={{ zIndex: 1000 }}    
+                >
+                  { servicoPrestadoFiltrados.length>0 ?  (servicoPrestadoFiltrados.map( (elem, index) => {
+                    return (
+                      <li 
+                        key={index}
+                        className='list-group-item list-group-item-action'
+                        style={{ cursor: 'pointer' }}
+                        onClick={ () => { 
+                          handleServicoPrestadoSelected(elem)
+                        }}
+                      >
+                        {elem}
+                      </li>
+                      
+                    )
+                  })) : null}
+                </ul>
+              </div>
+           
                     
               {/* mensagem */}
               <div className="mb-3">
