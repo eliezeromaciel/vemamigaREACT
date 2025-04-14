@@ -104,7 +104,7 @@
     }
   },
   "rules": {
-    "@typescript-eslint/no-unused-vars": "off", // AVISO DE VARIÁVEL QUE AINDA NAO FOI USADA
+    "@typescript-eslint/no-unused-vars": "warn", // AVISO DE VARIÁVEL QUE AINDA NAO FOI USADA
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "max-len": [
