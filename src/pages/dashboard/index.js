@@ -1,48 +1,63 @@
-import {React, useState } from 'react'
+import {React, useEffect, useState } from 'react'
 
 import {clientesCadastrados, tipoServicosCadastrados} from '../../components/data/database.js'
+
+import { getConsumidores } from '../../services/consumidores.js'
 
 
 const Dashboard = () => {
 
+  const [clientes, setClientes] = useState ( '')
   const [clientesFiltrados, setClientesFiltrados] = useState ('')
   const [inputNomeCliente, setInputNomeCliente] = useState ('')
 
-  const [servicoPrestadoFiltrados, setServicoPrestadoFiltrados] = useState ('')
-  const [inputServicoPrestado, setInputServicoPrestado] = useState ('')
+  // const [servicoPrestadoFiltrados, setServicoPrestadoFiltrados] = useState ('')
+  // const [inputServicoPrestado, setInputServicoPrestado] = useState ('')
 
-  const handleChangeInputNome = (e) => {  
+  const handleChangeInputNome =  (e) => { 
+    
     const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
     const valorLowerCase = valor.toLowerCase()
+    console.log(valorLowerCase)
+    console.log(clientes)
     setInputNomeCliente(valor)    // então, dou este valor do onchange para o state 
+
+    const clientesFiltradosMAP = clientes.map ( (elem) => elem.nome )
+    console.log(`clientes filtrados MAP: ${clientesFiltradosMAP}`)
     
-    const filtrados = clientesCadastrados.filter( (elem) => 
-      elem.toLowerCase().includes(valorLowerCase) )
+    const clientesFiltradosFilter = clientes.filter ( ( elem ) => elem.nome.toLowerCase().includes(valorLowerCase))
+    console.log(`resultado Filter:  ${JSON.stringify(clientesFiltradosFilter)}`)
+
+
+
+    // const clientesFiltrados = clientes.filter( (elem) => 
+    //   elem.toLowerCase().includes(valorLowerCase) )
       
-    setClientesFiltrados(filtrados)
+    // setClientesFiltrados(clientesFiltrados)
   }
+
 
   const handleClienteSelected = (elem) => {
     setInputNomeCliente(elem)
     setClientesFiltrados([])
   }
 
-  const handleChangeInputServicoPrestado = (e) => {  
-    const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
-    const valorLowerCase = valor.toLowerCase()
-    setInputServicoPrestado(valor)    // então, dou este valor do onchange para o state 
-    
-    const filtrados = tipoServicosCadastrados.filter( (elem) => 
-      elem.toLowerCase().includes(valorLowerCase) )
-      
-    setServicoPrestadoFiltrados(filtrados)
+
+
+
+  useEffect ( ()=> {
+    if (clientes === '')
+      loadClientes()
+  }, [clientes])
+  
+  const loadClientes = async () => {
+    const consumidores = await getConsumidores()
+    // consumidores recebe .data array de objetos
+    // console.log(`consumidores: ${consumidores.data.map( (elem ) => { return elem.id }   )}`)
+    setClientes(consumidores.data)
   }
 
-  const handleServicoPrestadoSelected = (elem) => {
-    setInputServicoPrestado(elem)
-    setServicoPrestadoFiltrados([])
-  }
-  
+
   return (
     <div className="container mt-4">
       <div className="row justify-content-center">
@@ -63,10 +78,9 @@ const Dashboard = () => {
                   required 
                   value={inputNomeCliente}
                   onChange={handleChangeInputNome}
-                  // onBlur={() =>  setClientesFiltrados([])} 
-                  onBlur={() => setTimeout(() => setClientesFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
+                  // onBlur={() => setTimeout(() => setClientesFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
                 />
-                <ul className='list-group position-absolute shadow'
+                {/* <ul className='list-group position-absolute shadow'
                   style={{ zIndex: 1000 }}    
                 >
                   { clientesFiltrados.length>0 ?  (clientesFiltrados.map( (elem, index) => {
@@ -84,11 +98,11 @@ const Dashboard = () => {
                       
                     )
                   })) : null}
-                </ul>
+                </ul> */}
               </div>
 
               {/* servico prestado */}
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <input 
                   className="form-control" 
                   type="text"
@@ -119,7 +133,7 @@ const Dashboard = () => {
                     )
                   })) : null}
                 </ul>
-              </div>
+              </div> */}
            
                     
               {/* mensagem */}
@@ -142,6 +156,8 @@ const Dashboard = () => {
               </div>
               
             </form>
+
+            <div>clientes: {JSON.stringify(clientes)}</div>
           </div>
         </div>
       </div>
