@@ -1,7 +1,5 @@
 import {React, useEffect, useState } from 'react'
 
-import {clientesCadastrados, tipoServicosCadastrados} from '../../components/data/database.js'
-
 import { getConsumidores } from '../../services/consumidores.js'
 
 
@@ -18,22 +16,11 @@ const Dashboard = () => {
     
     const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
     const valorLowerCase = valor.toLowerCase()
-    console.log(valorLowerCase)
-    console.log(clientes)
     setInputNomeCliente(valor)    // então, dou este valor do onchange para o state 
 
-    const clientesFiltradosMAP = clientes.map ( (elem) => elem.nome )
-    console.log(`clientes filtrados MAP: ${clientesFiltradosMAP}`)
-    
-    const clientesFiltradosFilter = clientes.filter ( ( elem ) => elem.nome.toLowerCase().includes(valorLowerCase))
-    console.log(`resultado Filter:  ${JSON.stringify(clientesFiltradosFilter)}`)
+    const filtraClientes = clientes.filter ( ( elem ) => elem.nome.toLowerCase().includes(valorLowerCase))
 
-
-
-    // const clientesFiltrados = clientes.filter( (elem) => 
-    //   elem.toLowerCase().includes(valorLowerCase) )
-      
-    // setClientesFiltrados(clientesFiltrados)
+    setClientesFiltrados(filtraClientes)
   }
 
 
@@ -42,22 +29,20 @@ const Dashboard = () => {
     setClientesFiltrados([])
   }
 
-
-
-
+  
+  const loadClientes = async () => {
+    const consumidores = await getConsumidores() // consumidores recebe .data {array de objetos}
+    setClientes(consumidores.data)
+  }
+  
   useEffect ( ()=> {
     if (clientes === '')
       loadClientes()
+    console.log('useeffect ')
   }, [clientes])
+
+
   
-  const loadClientes = async () => {
-    const consumidores = await getConsumidores()
-    // consumidores recebe .data array de objetos
-    // console.log(`consumidores: ${consumidores.data.map( (elem ) => { return elem.id }   )}`)
-    setClientes(consumidores.data)
-  }
-
-
   return (
     <div className="container mt-4">
       <div className="row justify-content-center">
@@ -78,9 +63,9 @@ const Dashboard = () => {
                   required 
                   value={inputNomeCliente}
                   onChange={handleChangeInputNome}
-                  // onBlur={() => setTimeout(() => setClientesFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
+                  onBlur={() => setTimeout(() => setClientesFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
                 />
-                {/* <ul className='list-group position-absolute shadow'
+                <ul className='list-group position-absolute shadow'
                   style={{ zIndex: 1000 }}    
                 >
                   { clientesFiltrados.length>0 ?  (clientesFiltrados.map( (elem, index) => {
@@ -90,15 +75,15 @@ const Dashboard = () => {
                         className='list-group-item list-group-item-action'
                         style={{ cursor: 'pointer' }}
                         onClick={ () => { 
-                          handleClienteSelected(elem)
+                          handleClienteSelected(elem.nome)
                         }}
                       >
-                        {elem}
+                        {elem.nome}
                       </li>
                       
                     )
                   })) : null}
-                </ul> */}
+                </ul>
               </div>
 
               {/* servico prestado */}
@@ -157,7 +142,6 @@ const Dashboard = () => {
               
             </form>
 
-            <div>clientes: {JSON.stringify(clientes)}</div>
           </div>
         </div>
       </div>
