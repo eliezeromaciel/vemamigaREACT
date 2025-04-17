@@ -1,7 +1,7 @@
 import {React, useEffect, useState } from 'react'
 
 import { getConsumidores } from '../../services/consumidores.js'
-
+import {getServicosPrestados} from '../../services/servicosPrestados.js'
 
 const Dashboard = () => {
 
@@ -9,18 +9,25 @@ const Dashboard = () => {
   const [clientesFiltrados, setClientesFiltrados] = useState ('')
   const [inputNomeCliente, setInputNomeCliente] = useState ('')
 
-  // const [servicoPrestadoFiltrados, setServicoPrestadoFiltrados] = useState ('')
-  // const [inputServicoPrestado, setInputServicoPrestado] = useState ('')
+  const [servicos, setServicos] = useState ( '')
+  const [servicoPrestadoFiltrados, setServicoPrestadoFiltrados] = useState ('')
+  const [inputServicoPrestado, setInputServicoPrestado] = useState ('')
 
   const handleChangeInputNome =  (e) => { 
-    
     const valor = e.target.value // aqui eu consigo pegar o valor que o usuário digitou, não como VALUE do input, mas VALUE DO EVENTO ONCHANGE.
     const valorLowerCase = valor.toLowerCase()
     setInputNomeCliente(valor)    // então, dou este valor do onchange para o state 
-
     const filtraClientes = clientes.filter ( ( elem ) => elem.nome.toLowerCase().includes(valorLowerCase))
-
     setClientesFiltrados(filtraClientes)
+  }
+
+  const handleChangeInputServicoPrestado =  (e) => { 
+    const valor = e.target.value 
+    const valorLowerCase = valor.toLowerCase()
+    setInputServicoPrestado(valor)    
+    const filtraServicos = servicos.filter ( ( elem ) => elem.nomeServico.toLowerCase().includes(valorLowerCase))
+    console.log(`resultado do filter nos servicos${JSON.stringify(filtraServicos)}`)
+    setServicoPrestadoFiltrados(filtraServicos)
   }
 
 
@@ -28,11 +35,20 @@ const Dashboard = () => {
     setInputNomeCliente(elem)
     setClientesFiltrados([])
   }
+  
+  const handleServicoSelected = (elem) => {
+    setInputServicoPrestado(elem)
+    setServicoPrestadoFiltrados([])
+  }
 
   
   const loadClientes = async () => {
     const consumidores = await getConsumidores() // consumidores recebe .data {array de objetos}
     setClientes(consumidores.data)
+  }
+  const loadServicos = async () => {
+    const servicosPrestados = await getServicosPrestados() 
+    setServicos(servicosPrestados.data)
   }
   
   useEffect ( ()=> {
@@ -86,8 +102,8 @@ const Dashboard = () => {
                 </ul>
               </div>
 
-              {/* servico prestado */}
-              {/* <div className="mb-3">
+              {/*servico prestado */}
+              <div className="mb-3">
                 <input 
                   className="form-control" 
                   type="text"
@@ -96,6 +112,7 @@ const Dashboard = () => {
                   maxLength="30"
                   required 
                   value={inputServicoPrestado}
+                  onClick={loadServicos}
                   onChange={handleChangeInputServicoPrestado}
                   onBlur={() => setTimeout(() => setServicoPrestadoFiltrados([]), 200)} // delay com settimeout, sem ele, ao clicar no nome , antes de dar certo ele zera os clientesfiltrados (funcao acima )
                 />
@@ -109,16 +126,16 @@ const Dashboard = () => {
                         className='list-group-item list-group-item-action'
                         style={{ cursor: 'pointer' }}
                         onClick={ () => { 
-                          handleServicoPrestadoSelected(elem)
+                          handleServicoSelected(elem.nomeServico)
                         }}
                       >
-                        {elem}
+                        {elem.nomeServico}
                       </li>
                       
                     )
                   })) : null}
                 </ul>
-              </div> */}
+              </div>
            
                     
               {/* mensagem */}
